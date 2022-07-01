@@ -1,4 +1,4 @@
 *.[oa]
-./printfTester/
-./.vscode/
-./main.c
+printfTester
+.vscode
+main.c
