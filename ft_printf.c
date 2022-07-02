@@ -14,31 +14,31 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-static void	verify_type(int format, t_node **my_node, va_list *test)
+static void	verify_type(int format, t_node **my_node, va_list test)
 {
 	if (format == 's')
-		string_to_char(my_node, va_arg(*test, char *));
+		add_string_node(my_node, va_arg(test, char *));
 	else if (format == 'c')
-		append_node_back(my_node, va_arg(*test, int));
+		append_node_back(my_node, va_arg(test, int));
 	else if (format == 'i' || format == 'd')
-		string_to_char(my_node, ft_itoa(va_arg(*test, int)));
-	else if (format == 'u')
-		string_to_char(my_node, ft_uitoa(va_arg(*test, int)));
+		add_number_node(my_node, va_arg(test, int), format);
 	else if (format == 'x' || format == 'X')
-		string_to_char(my_node, ft_itohex(va_arg(*test, int), format));
+		add_hex_node(my_node, va_arg(test, int), format);
+	else if (format == 'u')
+		add_number_node(my_node, va_arg(test, int), format);
 	else if (format == 'p')
-		string_to_char(my_node, pointer_to_hex(va_arg(*test, void *)));
+		add_void_node(my_node, va_arg(test, void *));
 }
 
 void	ft_printf(const char *format, ...)
 {
 	t_node	*my_node;
-	va_list	list_format;
+	va_list	list_args;
 	int		index;
 
 	index = 0;
 	my_node = NULL;
-	va_start(list_format, format);
+	va_start(list_args, format);
 	while (format[index] != '\0')
 	{
 		if (format[index] == '%')
@@ -46,13 +46,13 @@ void	ft_printf(const char *format, ...)
 			index++;
 			if (format[index] == '%')
 				append_node_back(&my_node, format[index]);
-			verify_type(format[index], &my_node, &list_format);
+			verify_type(format[index], &my_node, list_args);
 		}
-		else
+		else if (format[index] != '%')
 			append_node_back(&my_node, format[index]);
 		index++;
 	}
 	printf_node(&my_node);
 	free_all(&my_node);
-	va_end(list_format);
+	va_end(list_args);
 }

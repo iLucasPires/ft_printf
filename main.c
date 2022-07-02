@@ -2,7 +2,7 @@
 
 int	main(void)
 {
-	ft_printf("ola mundo %% %x %p \n", 3232, NULL);
-	printf("ola mundo %% %x %p \n", 3232, NULL);
+	ft_printf("ola mundo %%  %p \n", "100");
+	printf("ola mundo %%  %p \n", "100");
 	return (0);
 }

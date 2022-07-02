@@ -37,16 +37,17 @@ typedef struct s_types
 
 void				ft_printf(const char *format, ...);
 void				printf_node(t_node **list);
-char				*ft_itohex(unsigned long int nb, char hex_type);
+char				*ft_itohex(unsigned long int nb, char type);
 char				*pointer_to_hex(void *pointer);
 char				*ft_uitoa(unsigned int nbr);
-void				string_to_char(t_node **list, char *str);
-void				append_node_front(t_node **list, int value);
 void				append_node_back(t_node **list, int value);
-void				show_node(t_node **list);
-void				delete_front(t_node **list);
-void				delete_end(t_node **list);
 void				free_all(t_node **list);
 unsigned long int	ft_ptoi(void *pointer);
+
+// handle types
+void				add_string_node(t_node **list, char *str);
+void				add_number_node(t_node **list, int number, char type);
+void				add_void_node(t_node **list, void *pointer);
+void				add_hex_node(t_node **list, int number, char type);
 
 #endif

@@ -60,15 +60,15 @@ int	counter_node(t_node *list)
 
 void	printf_node(t_node **list)
 {
-	char *string_node;
-	t_node *aux;
-	int size;
-	int index;
+	char	*string_node;
+	t_node	*aux;
+	int		size;
+	int		index;
 
 	index = 0;
 	aux = list[0];
 	size = counter_node(aux);
-	string_node = malloc(sizeof(char *) * (size + 1));
+	string_node = malloc(sizeof(char *) * (size));
 	while (aux != NULL)
 	{
 		string_node[index] = aux->value;
@@ -77,4 +77,5 @@ void	printf_node(t_node **list)
 	}
 	string_node[index] = '\0';
 	write(1, string_node, size);
+	free(string_node);
 }
