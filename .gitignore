@@ -1,4 +1,6 @@
-*.[oa]
+*.a
+*.o
+*.out
 printfTester
 .vscode
 main.c
