@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-void	append_node_back(t_node **list, int value)
+void	append_node_back(t_node **list, char *value)
 {
 	t_node	*aux;
 	t_node	*node;
 
 	node = malloc(sizeof(t_node));
-	node->value = value;
+	node->value = ft_strdup(value);
 	node->next = NULL;
 	if (!*list)
 		*list = node;
@@ -41,6 +41,7 @@ void	free_all(t_node **list)
 	{
 		to_free = aux;
 		aux = aux->next;
+		free(to_free->value);
 		free(to_free);
 	}
 }
@@ -60,22 +61,12 @@ int	counter_node(t_node *list)
 
 void	printf_node(t_node **list)
 {
-	char	*string_node;
 	t_node	*aux;
-	int		size;
-	int		index;
 
-	index = 0;
-	aux = list[0];
-	size = counter_node(aux);
-	string_node = malloc(sizeof(char *) * (size));
+	aux = *list;
 	while (aux != NULL)
 	{
-		string_node[index] = aux->value;
+		write(1, aux->value, ft_strlen(aux->value));
 		aux = aux->next;
-		index++;
 	}
-	string_node[index] = '\0';
-	write(1, string_node, size);
-	free(string_node);
 }

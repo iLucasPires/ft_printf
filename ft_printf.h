@@ -22,7 +22,7 @@
 
 typedef struct s_node
 {
-	char			value;
+	char			*value;
 	struct s_node	*next;
 }					t_node;
 
@@ -30,17 +30,20 @@ typedef struct s_types
 {
 	int				integer;
 	int				index;
+	int				start;
 	char			character;
 	char			*string;
 	char			*number_string;
 }					t_types;
 
-void				ft_printf(const char *format, ...);
+int					ft_printf(const char *format, ...);
 void				printf_node(t_node **list);
 char				*ft_itohex(unsigned long int nb, char type);
 char				*pointer_to_hex(void *pointer);
 char				*ft_uitoa(unsigned int nbr);
-void				append_node_back(t_node **list, int value);
+int					counter_node(t_node *list);
+
+void				append_node_back(t_node **list, char *value);
 void				free_all(t_node **list);
 unsigned long int	ft_ptoi(void *pointer);
 
@@ -49,5 +52,5 @@ void				add_string_node(t_node **list, char *str);
 void				add_number_node(t_node **list, int number, char type);
 void				add_void_node(t_node **list, void *pointer);
 void				add_hex_node(t_node **list, int number, char type);
-
+void				add_char_node(t_node **list, char character);
 #endif

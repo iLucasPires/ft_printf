@@ -31,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = len_max + 1;
 	else
 		len = len + 1;
-	s1 = malloc(len);
+	s1 = malloc(sizeof(char *) * len);
 	if (s1 == NULL)
 		return (NULL);
 	ft_strlcpy(s1, s + start, len);

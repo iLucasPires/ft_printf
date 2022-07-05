@@ -14,12 +14,10 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-static void	verify_type(int format, t_node **my_node, va_list test)
+static void	verify_type(char format, t_node **my_node, va_list test)
 {
 	if (format == 's')
-		add_string_node(my_node, va_arg(test, char *));
-	else if (format == 'c')
-		append_node_back(my_node, va_arg(test, int));
+		append_node_back(my_node, va_arg(test, char *));
 	else if (format == 'i' || format == 'd')
 		add_number_node(my_node, va_arg(test, int), format);
 	else if (format == 'x' || format == 'X')
@@ -28,31 +26,37 @@ static void	verify_type(int format, t_node **my_node, va_list test)
 		add_number_node(my_node, va_arg(test, int), format);
 	else if (format == 'p')
 		add_void_node(my_node, va_arg(test, void *));
+	else if (format == 'c')
+		add_char_node(my_node, va_arg(test, int));
 }
 
-void	ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	t_node	*my_node;
 	va_list	list_args;
-	int		index;
+	t_types	aux;
 
-	index = 0;
+	aux.index = 0;
+	aux.start = 0;
 	my_node = NULL;
 	va_start(list_args, format);
-	while (format[index] != '\0')
+	while ((int)ft_strlen(format) > aux.index)
 	{
-		if (format[index] == '%')
+		aux.index++;
+		if (format[aux.index] == '%' || format[aux.index] == '\0')
 		{
-			index++;
-			if (format[index] == '%')
-				append_node_back(&my_node, format[index]);
-			verify_type(format[index], &my_node, list_args);
+			aux.string = ft_substr(format, aux.start, aux.index - aux.start);
+			append_node_back(&my_node, aux.string);
+			aux.index = aux.index + 1;
+			verify_type(format[aux.index], &my_node, list_args);
+			if (format[aux.index] == '%')
+				add_char_node(&my_node, '%');
+			aux.start = aux.index + 1;
+			free(aux.string);
 		}
-		else if (format[index] != '%')
-			append_node_back(&my_node, format[index]);
-		index++;
 	}
 	printf_node(&my_node);
 	free_all(&my_node);
 	va_end(list_args);
+	return (0);
 }
