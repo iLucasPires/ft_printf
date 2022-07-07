@@ -14,7 +14,7 @@
 // #include "libft/libft.h"
 #include <stdlib.h>
 
-static void	verify_type(char format, t_node **my_node, va_list list_arg)
+static void 	verify_type(char format, t_node **my_node, va_list list_arg)
 {
 	if (format == 's')
 		add_string_node(my_node, va_arg(list_arg, char *));
@@ -44,9 +44,10 @@ static void	ft_add_node(t_node **my_node, const char *format, va_list list_arg)
 		{
 			aux.len = aux.index - aux.start;
 			aux.string = ft_substr(format, aux.start, aux.len);
-			append_node_back(my_node, aux.string, aux.len);
+			if (aux.string != NULL)
+				append_node_back(my_node, aux.string, aux.len);
 			verify_type(format[++aux.index], my_node, list_arg);
-			aux.start = ++aux.index;
+			aux.start = aux.index + 1;
 			free(aux.string);
 		}
 		++aux.index;

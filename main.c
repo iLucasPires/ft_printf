@@ -6,9 +6,9 @@ int	main(void)
 	int size2;
 	int a = 10;
 	int *b = &a;
-	size = ft_printf("%%%%%%%%%%%%%%%%");
+	size = ft_printf(" %%   %%   %% ");
 	printf("\n");
-	size2 = printf("%%%%%%%%%%%%%%%%");
+	size2 = printf(" %%   %%   %% ");
 	printf("\n");
 	printf("meu : %d\n", size);
 	printf("dele: %d\n", size2);

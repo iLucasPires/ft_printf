@@ -16,7 +16,7 @@ void	append_node_back(t_node **list, char *value, int size)
 {
 	t_node	*aux;
 	t_node	*node;
-
+	
 	node = malloc(sizeof(t_node));
 	node->value = ft_strdup(value);
 	node->size = size;
