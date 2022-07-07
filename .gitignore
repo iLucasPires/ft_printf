@@ -1,0 +1,7 @@
+*.a
+*.o
+a.out
+/printfTester
+/ft_printf_tester
+/.vscode
+main.c

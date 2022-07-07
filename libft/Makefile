@@ -13,14 +13,13 @@ SRCS =	ft_isalnum.c	ft_isalpha.c	ft_isascii.c	ft_isdigit.c	\
 OBJECTS = $(SRCS:.c=.o)
 AR = ar rc
 
+.c.o: 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(AR) $(NAME) $(OBJECTS)
-
-$(OBJECTS): $(SRCS)
-	$(CC) $(CFLAGS) -c $(SRCS)
+	@$(AR) $(NAME) $(OBJECTS)
 
 clean: 
 	rm -f $(OBJECTS)

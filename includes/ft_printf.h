@@ -13,7 +13,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,35 +22,39 @@
 
 typedef struct s_node
 {
+	int				size;
 	char			*value;
 	struct s_node	*next;
 }					t_node;
 
 typedef struct s_types
 {
-	int				integer;
+	int				len;
 	int				index;
 	int				start;
-	char			character;
+	char			*aux;
 	char			*string;
-	char			*number_string;
+
 }					t_types;
 
+// # PROTOTYPES #
 int					ft_printf(const char *format, ...);
-void				printf_node(t_node **list);
-char				*ft_itohex(unsigned long int nb, char type);
-char				*pointer_to_hex(void *pointer);
-char				*ft_uitoa(unsigned int nbr);
-int					counter_node(t_node *list);
 
-void				append_node_back(t_node **list, char *value);
+//## CONVERSIONS ##
+size_t				ft_ptoi(void *pointer);
+char				*ft_uitoa(unsigned int number);
+char				*ft_itop(unsigned long int number);
+char				*ft_itohex(unsigned int number, char type);
+
+// ## HANDLES NODES ##
 void				free_all(t_node **list);
-unsigned long int	ft_ptoi(void *pointer);
+int					printf_node(t_node **list);
+void				append_node_back(t_node **list, char *value, int size);
 
-// handle types
-void				add_string_node(t_node **list, char *str);
-void				add_number_node(t_node **list, int number, char type);
+// ## HANDLE_TYPES ##
 void				add_void_node(t_node **list, void *pointer);
-void				add_hex_node(t_node **list, int number, char type);
+void				add_string_node(t_node **list, char *string);
 void				add_char_node(t_node **list, char character);
+void				add_hex_node(t_node **list, size_t number, char type);
+void				add_number_node(t_node **list, long int number, char type);
 #endif

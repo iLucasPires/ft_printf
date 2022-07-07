@@ -1,16 +1,16 @@
-#include "ft_printf.h"
+#include "./includes/ft_printf.h"
 
 int	main(void)
 {
-	// int size;
-	// int size2;
-	//  ft_printf("ola %s %s\n", "mundo", "sla");
-	ft_printf("cavalo %% vento", 'a');
-	// printf("\n");
-	// printf("cavalo %s vento", "ao");
-
-	// printf("%i\n", size);
-	// printf("%i\n", size2);
-
+	int size;
+	int size2;
+	int a = 10;
+	int *b = &a;
+	size = ft_printf("%%%%%%%%%%%%%%%%");
+	printf("\n");
+	size2 = printf("%%%%%%%%%%%%%%%%");
+	printf("\n");
+	printf("meu : %d\n", size);
+	printf("dele: %d\n", size2);
 	return (0);
 }
