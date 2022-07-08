@@ -13,12 +13,10 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../libft/libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+# include "../libft/libft.h"
 
 typedef struct s_node
 {
@@ -57,4 +55,5 @@ void				add_string_node(t_node **list, char *string);
 void				add_char_node(t_node **list, char character);
 void				add_hex_node(t_node **list, size_t number, char type);
 void				add_number_node(t_node **list, long int number, char type);
+
 #endif

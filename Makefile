@@ -1,4 +1,4 @@
-CC = cc
+CC = gcc
 NAME =	libftprintf.a
 FLAGS =	-Wall -Wextra -Werror
 

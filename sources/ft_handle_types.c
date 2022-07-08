@@ -40,7 +40,8 @@ void	add_char_node(t_node **list, char character)
 void	add_void_node(t_node **list, void *pointer)
 {
 	t_types	aux;
-	size_t number;
+	size_t	number;
+
 	if (pointer == NULL)
 		append_node_back(list, "(nil)", 5);
 	else
