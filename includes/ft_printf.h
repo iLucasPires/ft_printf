@@ -13,10 +13,13 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "../libft/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+
+# define HEX_BASE "0123456789abcdef"
+# define DEC_BASE "0123456789"
 
 typedef struct s_node
 {
@@ -40,9 +43,8 @@ int					ft_printf(const char *format, ...);
 
 //## CONVERSIONS ##
 size_t				ft_ptoi(void *pointer);
-char				*ft_uitoa(unsigned int number);
 char				*ft_itop(unsigned long int number);
-char				*ft_itohex(unsigned int number, char type);
+char				*ft_itobase(unsigned int number, int base, char *type_base);
 
 // ## HANDLES NODES ##
 void				free_all(t_node **list);

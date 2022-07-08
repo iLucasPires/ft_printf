@@ -21,62 +21,44 @@ static int	ft_cont_digits(size_t number, int base)
 		return (1);
 	while (number / base > 0)
 	{
-		counter++;
+		counter = counter + 1;
 		number = number / base;
 	}
 	return (counter);
 }
 
-char	*ft_uitoa(unsigned int number)
+char	*ft_itobase(unsigned int number, int base, char *type_base)
 {
-	t_types	aux;
+	t_types	var;
 
-	aux.len = ft_cont_digits(number, 10);
-	aux.string = malloc(sizeof(char) * (aux.len + 1));
-	if (!aux.string)
-		return (NULL);
-	aux.string[aux.len] = '\0';
-	while (aux.len)
+	var.aux = ft_strdup(type_base);
+	var.len = ft_cont_digits(number, base);
+	var.string = malloc(sizeof(char) * (var.len + 1));
+	var.string[var.len] = '\0';
+	while (var.len)
 	{
-		aux.string[--aux.len] = '0' + (number % 10);
-		number = number / 10;
+		var.len = var.len - 1;
+		var.string[var.len] = var.aux[number % base];
+		number = number / base;
 	}
-	return (aux.string);
-}
-
-char	*ft_itohex(unsigned int number, char type)
-{
-	t_types	aux;
-
-	if (type == 'x')
-		aux.aux = ft_strdup("0123456789abcdef");
-	else if (type == 'X')
-		aux.aux = ft_strdup("0123456789ABCDEF");
-	aux.len = ft_cont_digits(number, 16);
-	aux.string = malloc(sizeof(char) * (aux.len + 1));
-	aux.string[aux.len] = '\0';
-	while (aux.len--)
-	{
-		aux.string[aux.len] = aux.aux[number % 16];
-		number /= 16;
-	}
-	free(aux.aux);
-	return (aux.string);
+	free(var.aux);
+	return (var.string);
 }
 
 char	*ft_itop(size_t number)
 {
-	t_types	aux;
+	t_types	var;
 
-	aux.aux = ft_strdup("0123456789abcdef");
-	aux.len = ft_cont_digits(number, 16);
-	aux.string = malloc(sizeof(char) * (aux.len + 1));
-	aux.string[aux.len] = '\0';
-	while (aux.len--)
+	var.aux = ft_strdup(HEX_BASE);
+	var.len = ft_cont_digits(number, 16);
+	var.string = malloc(sizeof(char) * (var.len + 1));
+	var.string[var.len] = '\0';
+	while (var.len)
 	{
-		aux.string[aux.len] = aux.aux[number % 16];
-		number /= 16;
+		var.len = var.len - 1;
+		var.string[var.len] = var.aux[number % 16];
+		number = number / 16;
 	}
-	free(aux.aux);
-	return (aux.string);
+	free(var.aux);
+	return (var.string);
 }

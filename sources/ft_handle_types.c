@@ -19,7 +19,7 @@ void	add_number_node(t_node **list, long int number, char type)
 	if (type == 'i' || type == 'd')
 		aux.string = ft_itoa(number);
 	else if (type == 'u')
-		aux.string = ft_uitoa(number);
+		aux.string = ft_itobase(number, 10, DEC_BASE);
 	aux.len = ft_strlen(aux.string);
 	append_node_back(list, aux.string, aux.len);
 	free(aux.string);
@@ -60,8 +60,17 @@ void	add_hex_node(t_node **list, size_t number, char type)
 {
 	t_types	aux;
 
-	aux.string = ft_itohex(number, type);
+	aux.string = ft_itobase(number, 16, HEX_BASE);
 	aux.len = ft_strlen(aux.string);
+	if (type == 'X')
+	{
+		while (aux.len >= 0)
+		{
+			aux.string[aux.len] = ft_toupper(aux.string[aux.len]);
+			aux.len = aux.len - 1;
+		}
+		aux.len = ft_strlen(aux.string);
+	}
 	append_node_back(list, aux.string, aux.len);
 	free(aux.string);
 }

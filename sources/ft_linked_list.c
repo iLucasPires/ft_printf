@@ -63,18 +63,3 @@ int	printf_node(t_node **list)
 	free_all(list);
 	return (size);
 }
-
-char	*add_word_node(t_node **list, char *word)
-{
-	t_node	*aux;
-	char	*str;
-
-	str = ft_strdup(word);
-	aux = *list;
-	while (aux != NULL)
-	{
-		str = ft_strjoin(str, aux->value);
-		aux = aux->next;
-	}
-	return (str);
-}

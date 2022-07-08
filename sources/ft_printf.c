@@ -14,57 +14,57 @@
 // #include "libft/libft.h"
 #include <stdlib.h>
 
-static void	verify_type(char format, t_node **my_node, va_list list_arg)
+static void	verify_type(char format, t_node **list, va_list args)
 {
 	if (format == 's')
-		add_string_node(my_node, va_arg(list_arg, char *));
+		add_string_node(list, va_arg(args, char *));
 	else if (format == 'i' || format == 'd')
-		add_number_node(my_node, va_arg(list_arg, int), format);
+		add_number_node(list, va_arg(args, int), format);
 	else if (format == 'x' || format == 'X')
-		add_hex_node(my_node, va_arg(list_arg, int), format);
+		add_hex_node(list, va_arg(args, int), format);
 	else if (format == 'u')
-		add_number_node(my_node, va_arg(list_arg, int), format);
+		add_number_node(list, va_arg(args, int), format);
 	else if (format == 'p')
-		add_void_node(my_node, va_arg(list_arg, void *));
+		add_void_node(list, va_arg(args, void *));
 	else if (format == 'c')
-		add_char_node(my_node, va_arg(list_arg, int));
+		add_char_node(list, va_arg(args, int));
 	else if (format == '%')
-		add_char_node(my_node, '%');
+		add_char_node(list, '%');
 }
 
-static void	ft_add_node(t_node **my_node, const char *format, va_list list_arg)
+static void	aux_printf(t_node **list, const char *format, va_list args)
 {
-	t_types	aux;
+	t_types	var;
 
-	aux.index = 0;
-	aux.start = 0;
-	while ((int)ft_strlen(format) >= aux.index)
+	var.index = 0;
+	var.start = 0;
+	while ((int)ft_strlen(format) >= var.index)
 	{
-		if (format[aux.index] == '%' || format[aux.index] == '\0')
+		if (format[var.index] == '%' || format[var.index] == '\0')
 		{
-			aux.len = aux.index - aux.start;
-			aux.string = ft_substr(format, aux.start, aux.len);
-			append_node_back(my_node, aux.string, aux.len);
-			if (format[aux.index] != '\0')
+			var.len = var.index - var.start;
+			var.string = ft_substr(format, var.start, var.len);
+			append_node_back(list, var.string, var.len);
+			if (format[var.index] != '\0')
 			{
-				aux.index = aux.index + 1;
-				verify_type(format[aux.index], my_node, list_arg);
+				var.index = var.index + 1;
+				verify_type(format[var.index], list, args);
+				var.start = var.index + 1;
 			}
-			aux.start = aux.index + 1;
-			free(aux.string);
+			free(var.string);
 		}
-		aux.index = aux.index + 1;
+		var.index = var.index + 1;
 	}
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_node	*my_node;
+	t_node	*list;
 	va_list	list_args;
 
-	my_node = NULL;
+	list = NULL;
 	va_start(list_args, format);
-	ft_add_node(&my_node, format, list_args);
+	aux_printf(&list, format, list_args);
 	va_end(list_args);
-	return (printf_node(&my_node));
+	return (printf_node(&list));
 }
