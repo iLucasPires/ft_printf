@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// #include "libft/libft.h"
-#include <stdlib.h>
 
 static void	verify_type(char format, t_node **list, va_list args)
 {
