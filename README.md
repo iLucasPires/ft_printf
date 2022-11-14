@@ -39,7 +39,7 @@ printf is a 42 school project whose goal is to recode the libc function printf.
 
 ## Example
 ```bash
-$ cc name_file.c libftprintf.a -o name_program #the name_program executable
+cc name_file.c libftprintf.a -o name_program #the name_program executable
 ```
 
 ```c
