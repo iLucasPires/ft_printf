@@ -12,11 +12,17 @@
 
 # ft_printf
 printf is a 42 school project whose goal is to recode the libc function printf.
+
 ## How to use
 - Clone the repository
 - Run `make` to compile the library
 - Include the header file `ft_printf.h` in your project
 - Compile your project with the library `libftprintf.a`
+
+## Requirements
+
+- C compiler (clang or gcc)
+- Make
 
 ## Mandatory part
 - [x] The function must be named ft_printf.
